@@ -1,5 +1,7 @@
 package com.ly2251.autoscaleviewui;
 
+import android.content.Intent;
+import android.content.res.Configuration;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
@@ -9,11 +11,15 @@ import android.view.View;
 import android.view.Menu;
 import android.view.MenuItem;
 
+import com.ly2251.autoscaleviewui.autoviewutils.AutoUtils;
+
 public class MainActivity extends AppCompatActivity {
+    private View btn;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        AutoUtils.init(this);
         setContentView(R.layout.activity_main);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
@@ -27,11 +33,30 @@ public class MainActivity extends AppCompatActivity {
                         Snackbar.LENGTH_LONG).setAction("Action", null).show();
             }
         });
+
+        initView();
+    }
+
+    @Override
+    public void onConfigurationChanged(Configuration newConfig) {
+        super.onConfigurationChanged(newConfig);
+        AutoUtils.getInstance().setOrientation(newConfig.orientation);
+    }
+
+    private void initView() {
+        btn = findViewById(R.id.btn_tv);
+        btn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent demoActivity = new Intent();
+                demoActivity.setClass(MainActivity.this, DemoUiActivity.class);
+                startActivity(demoActivity);
+            }
+        });
     }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.menu_main, menu);
         return true;
     }

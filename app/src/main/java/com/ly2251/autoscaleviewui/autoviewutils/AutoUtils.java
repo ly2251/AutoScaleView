@@ -1,14 +1,14 @@
 package com.ly2251.autoscaleviewui.autoviewutils;
 
 import android.content.Context;
+import android.content.res.Configuration;
 import android.os.Build;
 import android.util.DisplayMetrics;
+import android.util.Log;
 import android.util.TypedValue;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
-
-import java.io.File;
 import java.lang.reflect.Field;
 
 /**
@@ -26,6 +26,7 @@ public class AutoUtils {
     private static float currentDensity = 1.5F;
 
     private static AutoUtils instance;
+    private int orientation = Configuration.ORIENTATION_LANDSCAPE;
 
     private AutoUtils(Context context) {
         initParam(context);
@@ -49,8 +50,19 @@ public class AutoUtils {
         }
     }
 
+    public synchronized void setOrientation(int orientation){
+        Log.e("","###!!!  setOrientation : "+ orientation);
+        if(this.orientation != orientation){
+            float temp = currentScreenHeight;
+            currentScreenHeight = currentScreenWidth;
+            currentScreenWidth = temp;
+            this.orientation = orientation;
+        }
+    }
+
     /**
      * init the Utils
+     *
      * @param context Context
      */
     public static void init(Context context) {
