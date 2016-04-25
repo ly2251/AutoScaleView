@@ -26,7 +26,6 @@ public class AutoUtils {
     private static float currentDensity = 1.5F;
 
     private static AutoUtils instance;
-    private int orientation = Configuration.ORIENTATION_LANDSCAPE;
 
     private AutoUtils(Context context) {
         initParam(context);
@@ -47,16 +46,6 @@ public class AutoUtils {
         } else {
             currentScreenWidth = displayMetrics.widthPixels;
             currentScreenHeight = scaleInitHeight(displayMetrics.heightPixels);
-        }
-    }
-
-    public synchronized void setOrientation(int orientation){
-        Log.e("","###!!!  setOrientation : "+ orientation);
-        if(this.orientation != orientation){
-            float temp = currentScreenHeight;
-            currentScreenHeight = currentScreenWidth;
-            currentScreenWidth = temp;
-            this.orientation = orientation;
         }
     }
 
