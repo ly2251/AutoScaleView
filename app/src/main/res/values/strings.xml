@@ -2,4 +2,6 @@
     <string name="app_name">AutoScaleViewUI</string>
     <string name="action_settings">Settings</string>
     <string name="half_width">横屏一半</string>
+    <string name="t1">所有的继承ViewGrop的都应当重载，并且注入AutoUtils,并调用autoScaleViewGrop()</string>
+    <string name="t2">tips尽可能的使用FrameLayout来做布局，尽可能的使View大小固定，可以减少onMeasure调用次数</string>
 </resources>

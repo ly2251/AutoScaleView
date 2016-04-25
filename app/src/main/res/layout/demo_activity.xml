@@ -8,7 +8,27 @@
         android:layout_width="640dp"
         android:layout_height="120dp"
         android:background="#0f0"
-        android:textSize="24dp"
-        android:text="@string/half_width" />
+        android:text="@string/half_width"
+        android:textSize="24dp" />
+
+    <com.ly2251.autoscaleviewui.autoviewutils.AutoScaleFrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="360dp">
+
+        <TextView
+            android:layout_width="320dp"
+            android:layout_height="120dp"
+            android:text="@string/t1"
+            android:textSize="40dp" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="120dp"
+            android:gravity="center"
+            android:textSize="28dp"
+            android:text="@string/t2"
+            android:layout_marginTop="120dp" />
+
+    </com.ly2251.autoscaleviewui.autoviewutils.AutoScaleFrameLayout>
 
 </com.ly2251.autoscaleviewui.autoviewutils.AutoScaleLinearLayout>

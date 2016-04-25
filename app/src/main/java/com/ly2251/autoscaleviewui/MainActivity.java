@@ -34,14 +34,7 @@ public class MainActivity extends AppCompatActivity {
                         Snackbar.LENGTH_LONG).setAction("Action", null).show();
             }
         });
-
         initView();
-    }
-
-    @Override
-    public void onConfigurationChanged(Configuration newConfig) {
-        super.onConfigurationChanged(newConfig);
-        AutoUtils.getInstance().setOrientation(newConfig.orientation);
     }
 
     private void initView() {

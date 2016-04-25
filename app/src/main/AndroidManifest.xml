@@ -19,7 +19,8 @@
             </intent-filter>
         </activity>
 
-        <activity android:name=".DemoUiActivity"/>
+        <activity android:name=".DemoUiActivity"
+            android:screenOrientation="landscape"/>
     </application>
 
 </manifest>

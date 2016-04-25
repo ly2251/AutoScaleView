@@ -30,4 +30,9 @@ public class AutoTextView extends TextView {
     public void setTextSize(final int n, final float n2){
         super.setTextSize(n,AutoUtils.getInstance().scaleTextSize(n2));
     }
+
+    @Override
+    protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
+        super.onMeasure(widthMeasureSpec, heightMeasureSpec);
+    }
 }
