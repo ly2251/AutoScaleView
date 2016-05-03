@@ -107,6 +107,8 @@ public class AutoUtils {
             if (layoutParams instanceof ViewGroup.MarginLayoutParams) {
                 autoScaleMargin((ViewGroup.MarginLayoutParams) layoutParams);
             }
+        }else {
+            Log.e("","###!!!! layoutParams is null");
         }
 
         autoScaleText(view);
