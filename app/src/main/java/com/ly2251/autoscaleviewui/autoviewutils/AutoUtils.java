@@ -33,7 +33,6 @@ public class AutoUtils {
         this.defaultHeight = defaultHeight;
         this.defaultWidth = defaultWidth;
         this.defaultDensity = defaultDensity;
-        Log.e("", "###@@@@  ");
     }
 
     /**
@@ -48,11 +47,11 @@ public class AutoUtils {
         /**
          * 如何是盒子设备，请打开此处注释代码
          */
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN_MR1) {
-            wm.getDefaultDisplay().getRealMetrics(localDisplayMetrics);
-        } else {
+//        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN_MR1) {
+//            wm.getDefaultDisplay().getRealMetrics(localDisplayMetrics);
+//        } else {
             wm.getDefaultDisplay().getMetrics(localDisplayMetrics);
-        }
+//        }
         currentDensity = localDisplayMetrics.density;
 
         if (localDisplayMetrics.widthPixels <= localDisplayMetrics.heightPixels) {
