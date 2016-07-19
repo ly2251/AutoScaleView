@@ -6,7 +6,7 @@ import android.widget.LinearLayout;
 
 /**
  * Description:
- * Created by: liuyi
+ * Created by: liuYi
  * Time: 16/4/23
  */
 public class AutoScaleLinearLayout extends LinearLayout {
@@ -25,6 +25,6 @@ public class AutoScaleLinearLayout extends LinearLayout {
     @Override
     protected void onFinishInflate() {
         super.onFinishInflate();
-        AutoUtils.getInstance().autoScaleViewGrop(this);
+        AutoUtils.getInstance().autoScaleViewGroup(this);
     }
 }

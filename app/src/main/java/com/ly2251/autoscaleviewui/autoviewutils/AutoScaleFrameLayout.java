@@ -7,7 +7,7 @@ import android.widget.FrameLayout;
 
 /**
  * Description:
- * Created by: liuyi
+ * Created by: liuYi
  * Time: 16/4/23
  */
 public class AutoScaleFrameLayout extends FrameLayout {
@@ -26,7 +26,7 @@ public class AutoScaleFrameLayout extends FrameLayout {
     @Override
     protected void onFinishInflate() {
         super.onFinishInflate();
-        AutoUtils.getInstance().autoScaleViewGrop(this);
+        AutoUtils.getInstance().autoScaleViewGroup(this);
     }
 
     @Override

@@ -7,7 +7,7 @@ import android.os.Bundle;
 
 /**
  * Description:
- * Created by: liuyi
+ * Created by: liuYi
  * Time: 16/4/24
  */
 public class DemoUiActivity extends Activity {
