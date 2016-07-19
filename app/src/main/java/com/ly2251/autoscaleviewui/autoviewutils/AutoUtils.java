@@ -1,7 +1,6 @@
 package com.ly2251.autoscaleviewui.autoviewutils;
 
 import android.content.Context;
-import android.content.res.Configuration;
 import android.os.Build;
 import android.util.DisplayMetrics;
 import android.util.Log;
@@ -10,6 +9,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.WindowManager;
 import android.widget.TextView;
+
 import java.lang.reflect.Field;
 
 /**
@@ -18,9 +18,9 @@ import java.lang.reflect.Field;
  * Time: 16/4/21
  */
 public class AutoUtils {
-    private static final float defalutWidth = 1280.0F;
-    private static final float defalutHeight = 720.0F;
-    private static final float defalutDensity = 1.0F;
+    private float defaultWidth = 1280.0F;
+    private float defaultHeight = 720.0F;
+    private float defaultDensity = 1.0F;
 
     private static float currentWidth = 1920.0F;
     private static float currentHeight = 1080.0F;
@@ -28,8 +28,12 @@ public class AutoUtils {
 
     private static AutoUtils instance;
 
-    private AutoUtils(Context context) {
+    public AutoUtils(Context context, float defaultWidth, float defaultHeight, float defaultDensity) {
         initParam(context);
+        this.defaultHeight = defaultHeight;
+        this.defaultWidth = defaultWidth;
+        this.defaultDensity = defaultDensity;
+        Log.e("", "###@@@@  ");
     }
 
     /**
@@ -44,11 +48,11 @@ public class AutoUtils {
         /**
          * 如何是盒子设备，请打开此处注释代码
          */
-//        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN_MR1) {
-//            wm.getDefaultDisplay().getRealMetrics(localDisplayMetrics);
-//        } else {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN_MR1) {
+            wm.getDefaultDisplay().getRealMetrics(localDisplayMetrics);
+        } else {
             wm.getDefaultDisplay().getMetrics(localDisplayMetrics);
-//        }
+        }
         currentDensity = localDisplayMetrics.density;
 
         if (localDisplayMetrics.widthPixels <= localDisplayMetrics.heightPixels) {
@@ -60,16 +64,20 @@ public class AutoUtils {
         }
     }
 
+
     /**
-     * need init first
+     * Init the Util
      *
-     * @param context Context
+     * @param context        Context
+     * @param defaultHeight  The model UI Height
+     * @param defaultWidth   The model UI Width
+     * @param defaultDensity The model UI density , the should be 1 is the best.
      */
-    public static void init(Context context) {
+    public static void init(Context context, float defaultHeight, float defaultWidth, float defaultDensity) {
         if (instance == null) {
             synchronized (AutoUtils.class) {
                 if (instance == null)
-                    instance = new AutoUtils(context);
+                    instance = new AutoUtils(context, defaultHeight, defaultWidth, defaultDensity);
             }
         }
     }
@@ -274,24 +282,24 @@ public class AutoUtils {
     }
 
     private int scaleHeightParamFixPx2PxInt(int paramInt) {
-        return Math.round(ScaleCurrentPxToDefaultPx(paramInt) * currentHeight / defalutHeight);
+        return Math.round(ScaleCurrentPxToDefaultPx(paramInt) * currentHeight / defaultHeight);
     }
 
     private int scaleWidthParamFixPx2PxInt(int paramInt) {
-        return Math.round(ScaleCurrentPxToDefaultPx(paramInt) * currentWidth / defalutWidth);
+        return Math.round(ScaleCurrentPxToDefaultPx(paramInt) * currentWidth / defaultWidth);
     }
 
     private int ScaleCurrentPxToDefaultPx(float paramFloat) {
         int dp = (int) (paramFloat / currentDensity + 0.5f);
-        return (int) (dp * defalutDensity + 0.5f);
+        return (int) (dp * defaultDensity + 0.5f);
     }
 
     private boolean checkWidthIsSame() {
-        return defalutWidth / currentWidth == defalutDensity / currentDensity;
+        return defaultWidth / currentWidth == defaultDensity / currentDensity;
     }
 
     private boolean checkHeightIsSame() {
-        return defalutHeight / currentHeight == defalutDensity / currentDensity;
+        return defaultHeight / currentHeight == defaultDensity / currentDensity;
     }
 
     private boolean checkIsSame() {
@@ -304,7 +312,7 @@ public class AutoUtils {
         }
         if (checkIsSame())
             return (int) size;
-        if (currentWidth / defalutWidth >= currentHeight / defalutHeight)
+        if (currentWidth / defaultWidth >= currentHeight / defaultHeight)
             return scaleHeightParamFixPx2PxInt((int) size);
         return scaleWidthParamFixPx2PxInt((int) size);
     }
@@ -316,7 +324,7 @@ public class AutoUtils {
      * @return current Px
      */
     public int scaleModuleHorizontalDp2Px(int moduleDp) {
-        return (int) (moduleDp / (defalutWidth / defalutDensity + 0.5f) * (currentWidth / currentDensity + 0.5) * currentDensity + 0.5);
+        return (int) (moduleDp / (defaultWidth / defaultDensity + 0.5f) * (currentWidth / currentDensity + 0.5) * currentDensity + 0.5);
     }
 
     /**
@@ -326,7 +334,7 @@ public class AutoUtils {
      * @return current Px
      */
     public int scaleModuleVerticalDp2Px(int moduleDp) {
-        return (int) (moduleDp / (defalutHeight / defalutDensity + 0.5f) * (currentHeight / currentDensity + 0.5) * currentDensity + 0.5);
+        return (int) (moduleDp / (defaultHeight / defaultDensity + 0.5f) * (currentHeight / currentDensity + 0.5) * currentDensity + 0.5);
     }
 
     /**
@@ -336,7 +344,7 @@ public class AutoUtils {
      * @return current px
      */
     public int scaleModuleVerticalPx2Px(int modulePx) {
-        return (int) ((modulePx / defalutDensity + 0.5f) / (defalutHeight / defalutDensity + 0.5f) * (currentHeight / currentDensity + 0.5) * currentDensity + 0.5);
+        return (int) ((modulePx / defaultDensity + 0.5f) / (defaultHeight / defaultDensity + 0.5f) * (currentHeight / currentDensity + 0.5) * currentDensity + 0.5);
     }
 
     /**
@@ -346,7 +354,7 @@ public class AutoUtils {
      * @return current px
      */
     public int scaleModuleHorizontalPx2Px(int modulePx) {
-        return (int) ((modulePx / defalutDensity + 0.5f) / (defalutWidth / defalutDensity + 0.5f) * (currentWidth / currentDensity + 0.5) * currentDensity + 0.5);
+        return (int) ((modulePx / defaultDensity + 0.5f) / (defaultWidth / defaultDensity + 0.5f) * (currentWidth / currentDensity + 0.5) * currentDensity + 0.5);
     }
 
     public float getCurrentWidth() {
